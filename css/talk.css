@@ -1,0 +1,542 @@
+/* ======================================================
+   MỜI TỪ ĐÀN
+   TALK SCENE
+====================================================== */
+
+
+/* ======================================================
+   TALK WINDOW
+====================================================== */
+
+#talk-window {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 2;
+
+  width: 2560px;
+  height: 1440px;
+
+  overflow: hidden;
+
+  background: #000;
+
+  opacity: 0;
+
+  visibility: hidden;
+
+  pointer-events: none;
+
+  transition:
+    opacity 600ms ease,
+    visibility 600ms ease;
+}
+
+
+body.talk-active
+#talk-window {
+  opacity: 1;
+
+  visibility: visible;
+
+  pointer-events: auto;
+}
+
+
+
+/* ======================================================
+   TALK CAMERA BOARD
+
+   sketch.js applies the SAME camera transform here
+   as the INTRO board.
+
+   This means:
+
+   mouse pan
+   mouse zoom
+   hand pan
+   hand zoom
+
+   continue working in TALK.
+====================================================== */
+
+#talk-board {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: 2560px;
+  height: 1440px;
+
+  transform:
+    translate(
+      -50%,
+      -50%
+    )
+    scale(1);
+
+  transform-origin:
+    center center;
+
+  will-change:
+    transform;
+
+  user-select: none;
+
+  /* The whole scene is NOT clickable anymore. */
+  cursor: default;
+}
+
+
+
+/* ======================================================
+   FULL-SCREEN TALK MEDIA
+====================================================== */
+
+.talk-media {
+  position: absolute;
+
+  inset: 0;
+
+  display: block;
+
+  width: 2560px;
+  height: 1440px;
+
+  object-fit: fill;
+
+  user-select: none;
+
+  pointer-events: none;
+}
+
+
+
+/* ======================================================
+   LAYER ORDER
+
+   BOTTOM
+   ↓
+   Talk_[time]vid
+   Talk_[time]3
+   Talk_[time]worm
+   Talk_[time]1 / 1_2 / 1_3
+   TOP
+====================================================== */
+
+.talk-video {
+  z-index: 1;
+
+  background: #000;
+}
+
+
+.talk-layer3 {
+  z-index: 2;
+}
+
+
+.talk-worm {
+  z-index: 3;
+}
+
+
+.talk-character {
+  z-index: 4;
+}
+
+
+
+/* ======================================================
+   CHARACTER
+
+   IMPORTANT:
+
+   Character changes are now INSTANT.
+
+   There is no opacity transition here anymore.
+====================================================== */
+
+.talk-character {
+  opacity: 1;
+
+  transition: none;
+}
+
+
+
+/* ======================================================
+   WORM
+
+   ORIGINAL ASSET SIZE:
+   485 × 467
+
+   The worm itself is the clickable object.
+
+   Nothing else in the TALK environment triggers
+   the duck animation.
+====================================================== */
+
+.talk-worm {
+  position: absolute;
+
+  width: 485px;
+  height: 467px;
+
+  object-fit: contain;
+
+  cursor: pointer;
+
+  pointer-events: auto;
+
+  user-select: none;
+
+  transform-origin:
+    center bottom;
+
+  will-change:
+    transform;
+
+
+
+  /* ==================================================
+     IDLE FLOATING ANIMATION
+
+     Slight up/down breathing movement.
+  ================================================== */
+
+  animation:
+    talk-worm-idle
+    3.2s
+    ease-in-out
+    infinite;
+}
+
+
+
+/* ======================================================
+   WORM POSITION
+
+   You changed DAWN to:
+
+   left: 150px;
+   top: 420px;
+
+   I have now copied this position to all four times.
+
+   You can tweak each separately later if needed.
+====================================================== */
+
+
+/* ======================================================
+   DAWN
+====================================================== */
+
+#talk-window[data-environment="dawn"]
+.talk-worm {
+  left: 150px;
+
+  top: 420px;
+}
+
+
+
+/* ======================================================
+   MORNING
+====================================================== */
+
+#talk-window[data-environment="morning"]
+.talk-worm {
+  left: 150px;
+
+  top: 420px;
+}
+
+
+
+/* ======================================================
+   DUSK
+====================================================== */
+
+#talk-window[data-environment="dusk"]
+.talk-worm {
+  left: 150px;
+
+  top: 420px;
+}
+
+
+
+/* ======================================================
+   NIGHT
+====================================================== */
+
+#talk-window[data-environment="night"]
+.talk-worm {
+  left: 150px;
+
+  top: 420px;
+}
+
+
+
+/* ======================================================
+   WORM IDLE MOVEMENT
+
+   Very small movement only.
+
+   Change -10px if you want stronger/weaker floating.
+====================================================== */
+
+@keyframes talk-worm-idle {
+
+  0%,
+  100% {
+
+    transform:
+      translateY(0);
+
+  }
+
+
+  50% {
+
+    transform:
+      translateY(-10px);
+
+  }
+
+}
+
+
+
+/* ======================================================
+   WORM DUCK
+
+   When clicked:
+
+   - idle animation temporarily stops
+   - worm ducks down quickly
+   - stays slightly low
+   - slowly rises
+   - then idle animation resumes
+====================================================== */
+
+.talk-worm.is-ducking {
+  animation:
+    talk-worm-duck
+    1750ms
+    cubic-bezier(
+      0.18,
+      0.72,
+      0.2,
+      1
+    )
+    both;
+}
+
+
+
+/* ======================================================
+   DUCK ANIMATION
+====================================================== */
+
+@keyframes talk-worm-duck {
+
+  /* NORMAL */
+
+  0% {
+
+    transform:
+      translateY(0)
+      scaleY(1);
+
+  }
+
+
+
+  /* QUICKLY START DUCKING */
+
+  12% {
+
+    transform:
+      translateY(80px)
+      scaleY(0.97);
+
+  }
+
+
+
+  /* LOW */
+
+  22% {
+
+    transform:
+      translateY(145px)
+      scaleY(0.90);
+
+  }
+
+
+
+  /* HOLD */
+
+  38% {
+
+    transform:
+      translateY(145px)
+      scaleY(0.90);
+
+  }
+
+
+
+  /* BEGIN RISING */
+
+  55% {
+
+    transform:
+      translateY(115px)
+      scaleY(0.94);
+
+  }
+
+
+
+  70% {
+
+    transform:
+      translateY(75px)
+      scaleY(0.97);
+
+  }
+
+
+
+  84% {
+
+    transform:
+      translateY(35px)
+      scaleY(0.99);
+
+  }
+
+
+
+  /* BACK TO NORMAL */
+
+  100% {
+
+    transform:
+      translateY(0)
+      scaleY(1);
+
+  }
+
+}
+
+
+
+/* ======================================================
+   TALK TEXT
+
+   SAME POSITION + SAME SIZE AS INTRO TEXT.
+
+   IMPORTANT:
+
+   Text stays OUTSIDE talk-board in index.html.
+
+   Therefore:
+
+   camera zoom/pan affects the world
+   but not the dialogue UI.
+====================================================== */
+
+.talk-textbox {
+  position: absolute;
+
+  z-index: 28;
+
+  left: 1222.5px;
+
+  bottom: 359px;
+
+  width: 973px;
+  height: auto;
+
+  max-width: none;
+  max-height: none;
+
+  display: block;
+
+  opacity: 0;
+
+  visibility: hidden;
+
+  pointer-events: none;
+
+  cursor: pointer;
+
+  user-select: none;
+
+  transform:
+    translateX(-50%);
+
+  transform-origin:
+    center center;
+
+
+
+  /* ==================================================
+     TEXT STILL FADES
+  ================================================== */
+
+  transition:
+    opacity 340ms ease,
+    visibility 340ms ease;
+
+
+
+  filter:
+    drop-shadow(
+      0
+      5px
+      16px
+      rgba(
+        0,
+        0,
+        0,
+        0.45
+      )
+    );
+}
+
+
+
+/* ======================================================
+   TEXT VISIBLE
+====================================================== */
+
+body.talk-active
+.talk-textbox.is-visible {
+  opacity: 1;
+
+  visibility: visible;
+
+  pointer-events: auto;
+}
+
+
+
+/* ======================================================
+   TEXT FADE OUT DURING CHANGE
+====================================================== */
+
+body.talk-active
+.talk-textbox.is-visible.is-swapping {
+  opacity: 0;
+
+  pointer-events: none;
+}

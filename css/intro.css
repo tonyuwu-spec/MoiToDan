@@ -1,0 +1,187 @@
+/* ======================================================
+   INTRO WINDOW
+====================================================== */
+
+#scene-window {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 1;
+
+  width: 2560px;
+  height: 1440px;
+
+  overflow: hidden;
+
+  background: #000;
+
+  opacity: 0;
+
+  visibility: hidden;
+
+  pointer-events: none;
+
+  transition:
+    opacity 600ms ease,
+    visibility 600ms ease;
+}
+
+
+body.intro-active
+#scene-window {
+  opacity: 1;
+
+  visibility: visible;
+
+  pointer-events: auto;
+}
+
+
+
+/* ======================================================
+   INTRO CAMERA BOARD
+====================================================== */
+
+#scene-board {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: 2560px;
+  height: 1440px;
+
+  transform:
+    translate(
+      -50%,
+      -50%
+    )
+    scale(1);
+
+  transform-origin:
+    center center;
+
+  will-change:
+    transform;
+}
+
+
+
+/* ======================================================
+   MEDIA
+====================================================== */
+
+.scene-media {
+  position: absolute;
+
+  inset: 0;
+
+  display: block;
+
+  width: 2560px;
+  height: 1440px;
+
+  object-fit: fill;
+
+  user-select: none;
+
+  pointer-events: none;
+}
+
+
+.scene-video {
+  z-index: 1;
+
+  background: #000;
+}
+
+
+.tree3 {
+  z-index: 2;
+}
+
+
+.tree2 {
+  z-index: 3;
+}
+
+
+.tree1 {
+  z-index: 7;
+}
+
+
+
+/* ======================================================
+   INTRO TEXT
+====================================================== */
+
+.intro-textbox {
+  position: absolute;
+
+  z-index: 28;
+
+  left: 1222.5px;
+
+  bottom: 359px;
+
+  width: 973px;
+  height: auto;
+
+  max-width: none;
+  max-height: none;
+
+  display: block;
+
+  opacity: 0;
+
+  visibility: hidden;
+
+  pointer-events: none;
+
+  cursor: pointer;
+
+  user-select: none;
+
+  transform:
+    translateX(-50%);
+
+  transform-origin:
+    center center;
+
+  transition:
+    opacity 340ms ease,
+    visibility 340ms ease;
+
+  filter:
+    drop-shadow(
+      0
+      5px
+      16px
+      rgba(
+        0,
+        0,
+        0,
+        0.45
+      )
+    );
+}
+
+
+body.intro-active
+.intro-textbox.is-visible {
+  opacity: 1;
+
+  visibility: visible;
+
+  pointer-events: auto;
+}
+
+
+body.intro-active
+.intro-textbox.is-visible.is-swapping {
+  opacity: 0;
+
+  pointer-events: none;
+}

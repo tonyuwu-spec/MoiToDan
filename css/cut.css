@@ -1,0 +1,1438 @@
+/* ======================================================
+   MỜI TỪ ĐÀN
+   CUT / SILK SCENE
+====================================================== */
+
+
+/* ======================================================
+   EASY POSITION TWEAKS
+====================================================== */
+
+#cut-window {
+
+
+  /* ==================================================
+     SILK
+  ================================================== */
+
+  --cut-silk-left:
+    890px;
+
+  --cut-silk-top:
+    265px;
+
+  --cut-silk-size:
+    780px;
+
+
+
+  /* ==================================================
+     ORIGINAL CUT TALK TEXT
+  ================================================== */
+
+  --cut-talktext-right:
+    180px;
+
+  --cut-talktext-top:
+    450px;
+
+  --cut-talktext-width:
+    500px;
+
+
+
+  /* ==================================================
+     CUT HINT
+  ================================================== */
+
+  --cut-hint-left:
+    50%;
+
+  --cut-hint-bottom:
+    320px;
+
+}
+
+
+
+/* ======================================================
+   CUT WINDOW
+====================================================== */
+
+#cut-window {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 2;
+
+  width: 2560px;
+  height: 1440px;
+
+  overflow: hidden;
+
+  background: #000;
+
+  opacity: 0;
+
+  visibility: hidden;
+
+  pointer-events: none;
+
+  transition:
+    opacity 600ms ease,
+    visibility 600ms ease;
+}
+
+
+
+/* ======================================================
+   SCENE ISOLATION
+
+   KEEP THIS.
+====================================================== */
+
+body:not(.cut-active)
+#cut-window,
+
+body:not(.cut-active)
+#cut-window * {
+  pointer-events: none !important;
+}
+
+
+
+/* ======================================================
+   CUT ACTIVE
+====================================================== */
+
+body.cut-active
+#cut-window {
+  opacity: 1;
+
+  visibility: visible;
+
+  pointer-events: auto;
+}
+
+
+
+/* ======================================================
+   CUT BOARD
+====================================================== */
+
+#cut-board {
+  position: absolute;
+
+  inset: 0;
+
+  width: 2560px;
+  height: 1440px;
+
+  overflow: hidden;
+
+  user-select: none;
+
+  pointer-events: none;
+}
+
+
+
+/* ======================================================
+   CUT BACKGROUND
+====================================================== */
+
+.cut-bg {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 1;
+
+  display: block;
+
+  width: 2560px;
+  height: 1440px;
+
+  object-fit: fill;
+
+  user-select: none;
+
+  pointer-events: none;
+}
+
+
+
+/* ======================================================
+   SILK MOUNT
+====================================================== */
+
+#cut-silk-mount {
+  position: absolute;
+
+  left:
+    var(
+      --cut-silk-left
+    );
+
+  top:
+    var(
+      --cut-silk-top
+    );
+
+  z-index: 6;
+
+  width:
+    var(
+      --cut-silk-size
+    );
+
+  height:
+    var(
+      --cut-silk-size
+    );
+
+  border: 0;
+
+  outline: 0;
+
+  background: transparent;
+
+  overflow: visible;
+
+  pointer-events: none;
+}
+
+
+
+body.cut-active
+#cut-silk-mount {
+  pointer-events: auto;
+}
+
+
+
+/* ======================================================
+   SILK CANVAS
+====================================================== */
+
+#cut-silk-mount canvas {
+  position: absolute !important;
+
+  left: 0 !important;
+  top: 0 !important;
+
+  display: block !important;
+
+  width:
+    var(
+      --cut-silk-size
+    )
+    !important;
+
+  height:
+    var(
+      --cut-silk-size
+    )
+    !important;
+
+  max-width: none !important;
+  max-height: none !important;
+
+  border: 0 !important;
+
+  outline: 0 !important;
+
+  background:
+    transparent !important;
+
+  pointer-events: none;
+
+  cursor: default;
+}
+
+
+
+body.cut-active
+#cut-silk-mount canvas {
+  pointer-events: auto;
+}
+
+
+
+body.cut-active.cut-cutting
+#cut-silk-mount canvas {
+  cursor: crosshair;
+}
+
+
+
+/* ======================================================
+   CUT CHARACTER
+====================================================== */
+
+.cut-talk-art {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 10;
+
+  display: block;
+
+  width: 2560px;
+  height: 1440px;
+
+  max-width: none;
+  max-height: none;
+
+  object-fit: fill;
+
+  user-select: none;
+
+  pointer-events: none;
+
+  opacity: 1;
+
+  transform:
+    translate3d(
+      0,
+      0,
+      0
+    );
+
+  transition: none;
+}
+
+
+
+/* ======================================================
+   ORIGINAL CUT TEXTBOX
+====================================================== */
+
+.cut-textbox {
+  position: absolute;
+
+  z-index: 29;
+
+  right:
+    var(
+      --cut-talktext-right
+    );
+
+  top:
+    var(
+      --cut-talktext-top
+    );
+
+  display: block;
+
+  width:
+    var(
+      --cut-talktext-width
+    );
+
+  height: auto;
+
+  max-width: none;
+  max-height: none;
+
+  opacity: 0;
+
+  visibility: hidden;
+
+  user-select: none;
+
+  pointer-events: none;
+
+  transform:
+    translateY(
+      6px
+    );
+
+  transition:
+    opacity 340ms ease,
+    visibility 340ms ease,
+    transform 340ms ease;
+
+  filter:
+    drop-shadow(
+      0
+      5px
+      16px
+      rgba(
+        0,
+        0,
+        0,
+        0.45
+      )
+    );
+}
+
+
+
+body.cut-active
+.cut-textbox.is-visible {
+  opacity: 1;
+
+  visibility: visible;
+
+  transform:
+    translateY(
+      0
+    );
+
+  pointer-events: none;
+}
+
+
+
+/* ======================================================
+   CUT TEXT 6 CLICKABLE
+====================================================== */
+
+body.cut-active
+.cut-textbox.cut-next-ready {
+  pointer-events: auto !important;
+
+  cursor: pointer;
+}
+
+
+
+body.cut-active
+.cut-textbox.is-visible.is-swapping {
+  opacity: 0;
+
+  transform:
+    translateY(
+      6px
+    );
+}
+
+
+
+/* ======================================================
+   INPUT PANEL
+
+   SHARP TECHNICAL PANEL.
+====================================================== */
+
+.cut-input-panel {
+  position: absolute;
+
+  z-index: 29;
+
+  left: 130px;
+  top: 330px;
+
+  width: 550px;
+
+  padding:
+    32px
+    30px
+    28px;
+
+  border:
+    2px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.90
+    );
+
+  border-radius: 0;
+
+  background:
+    rgba(
+      5,
+      5,
+      5,
+      0.82
+    );
+
+  color: white;
+
+  opacity: 0;
+
+  visibility: hidden;
+
+  pointer-events: none;
+
+  transform:
+    translateX(
+      0
+    );
+
+  transition:
+    opacity 420ms ease,
+    visibility 420ms ease,
+    transform 420ms ease;
+}
+
+
+
+body.cut-active
+.cut-input-panel {
+  opacity: 1;
+
+  visibility: visible;
+
+  pointer-events: auto;
+
+  transform:
+    translateX(
+      0
+    );
+}
+
+
+
+body.cut-active
+.cut-input-panel.is-hidden {
+  opacity: 0;
+
+  visibility: hidden;
+
+  pointer-events: none;
+
+  transform:
+    translateX(
+      -30px
+    );
+}
+
+
+
+/* ======================================================
+   INPUT HEADING
+====================================================== */
+
+.cut-input-heading {
+  margin-bottom: 16px;
+
+  color: white;
+
+  font-size: 28px;
+
+  font-weight: 900;
+
+  letter-spacing:
+    0.055em;
+
+  pointer-events: none;
+
+  user-select: none;
+}
+
+
+
+/* ======================================================
+   INPUT SUBTITLE
+====================================================== */
+
+.cut-input-subtitle {
+  margin-bottom: 24px;
+
+  max-width: 450px;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.62
+    );
+
+  font-size: 17px;
+
+  line-height: 1.55;
+
+  pointer-events: none;
+
+  user-select: none;
+}
+
+
+
+/* ======================================================
+   TEXTAREA
+====================================================== */
+
+#cut-thought-input {
+  display: block;
+
+  width: 100%;
+  height: 300px;
+
+  resize: none;
+
+  padding:
+    22px
+    20px;
+
+  border:
+    2px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.58
+    );
+
+  border-radius: 0;
+
+  outline: none;
+
+  background:
+    rgba(
+      0,
+      0,
+      0,
+      0.52
+    );
+
+  color: white;
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    monospace;
+
+  font-size: 19px;
+
+  font-weight: 700;
+
+  line-height: 1.55;
+
+  pointer-events: none;
+}
+
+
+
+body.cut-active
+.cut-input-panel:not(.is-hidden)
+#cut-thought-input {
+  pointer-events: auto;
+}
+
+
+
+#cut-thought-input::placeholder {
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.36
+    );
+}
+
+
+
+#cut-thought-input:focus {
+  border-color: white;
+
+  background:
+    rgba(
+      0,
+      0,
+      0,
+      0.68
+    );
+}
+
+
+
+/* ======================================================
+   BUTTON ROW
+====================================================== */
+
+.cut-input-buttons {
+  display: grid;
+
+  grid-template-columns:
+    1fr
+    1fr;
+
+  gap: 12px;
+
+  margin-top: 16px;
+}
+
+
+
+/* ======================================================
+   BUTTON
+====================================================== */
+
+.cut-input-button {
+  min-height: 58px;
+
+  padding:
+    0
+    18px;
+
+  border:
+    2px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.88
+    );
+
+  border-radius: 0;
+
+  background:
+    rgba(
+      0,
+      0,
+      0,
+      0.24
+    );
+
+  color: white;
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    monospace;
+
+  font-size: 17px;
+
+  font-weight: 900;
+
+  letter-spacing:
+    0.04em;
+
+  cursor: pointer;
+
+  pointer-events: none;
+
+  transition:
+    background 140ms ease,
+    color 140ms ease,
+    transform 120ms ease;
+}
+
+
+
+body.cut-active
+.cut-input-panel:not(.is-hidden)
+.cut-input-button {
+  pointer-events: auto;
+}
+
+
+
+body.cut-active
+.cut-input-panel:not(.is-hidden)
+.cut-input-button:hover {
+  background: white;
+
+  color: black;
+}
+
+
+
+body.cut-active
+.cut-input-panel:not(.is-hidden)
+.cut-input-button:active {
+  transform:
+    translateY(
+      2px
+    );
+}
+
+
+
+/* ======================================================
+   INPUT ERROR
+====================================================== */
+
+body.cut-active
+.cut-input-panel.is-error {
+  animation:
+    cut-input-error
+    280ms
+    ease;
+}
+
+
+
+@keyframes cut-input-error {
+
+  0%,
+  100% {
+    transform:
+      translateX(
+        0
+      );
+  }
+
+
+  25% {
+    transform:
+      translateX(
+        -10px
+      );
+  }
+
+
+  75% {
+    transform:
+      translateX(
+        10px
+      );
+  }
+
+}
+
+
+
+/* ======================================================
+   CUT MODE HINT
+
+   SAME TECHNICAL LANGUAGE AS DRAW STATUS.
+====================================================== */
+
+.cut-mode-hint {
+  position: absolute;
+
+  z-index: 29;
+
+  left:
+    var(
+      --cut-hint-left
+    );
+
+  bottom:
+    var(
+      --cut-hint-bottom
+    );
+
+  padding:
+    12px
+    20px;
+
+  border:
+    2px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.78
+    );
+
+  border-radius: 0;
+
+  background:
+    rgba(
+      5,
+      5,
+      5,
+      0.74
+    );
+
+  color: white;
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    monospace;
+
+  font-size: 14px;
+
+  letter-spacing:
+    0.045em;
+
+  white-space: nowrap;
+
+  opacity: 0;
+
+  visibility: hidden;
+
+  pointer-events: none;
+
+  transform:
+    translate(
+      -50%,
+      12px
+    );
+
+  transition:
+    opacity 350ms ease,
+    visibility 350ms ease,
+    transform 350ms ease;
+}
+
+
+
+body.cut-active
+.cut-mode-hint.is-visible {
+  opacity: 1;
+
+  visibility: visible;
+
+  transform:
+    translate(
+      -50%,
+      0
+    );
+
+  pointer-events: none;
+}
+
+
+
+/* ======================================================
+   ======================================================
+   INNER THOUGHT
+   ======================================================
+====================================================== */
+
+
+/* ======================================================
+   ROOT
+====================================================== */
+
+#cut-inner-thought-overlay {
+  position: absolute;
+
+  left: 0;
+  top: 0;
+
+  width: 2560px;
+  height: 1440px;
+
+  overflow: hidden;
+
+  z-index: 50000;
+
+  background: #000;
+
+  opacity: 0;
+
+  pointer-events: auto;
+
+  user-select: none;
+
+  contain:
+    paint;
+
+  transition:
+    opacity 500ms ease;
+}
+
+
+
+#cut-inner-thought-overlay.is-visible {
+  opacity: 1;
+}
+
+
+
+/* ======================================================
+   VIDEO PHASE
+====================================================== */
+
+#cut-inner-thought-overlay.is-video-phase {
+  z-index: 3;
+}
+
+
+
+/* ======================================================
+   SHARED CAMERA LAYER
+====================================================== */
+
+#cut-inner-camera-layer {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  z-index: 1;
+
+  width: 2560px;
+  height: 1440px;
+
+  transform-origin:
+    center
+    center;
+
+  pointer-events: none;
+
+  will-change:
+    transform;
+}
+
+
+
+/* ======================================================
+   BG2 PNG
+====================================================== */
+
+#cut-inner-bg-image {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 1;
+
+  display: block;
+
+  width: 2560px;
+  height: 1440px;
+
+  max-width: none;
+  max-height: none;
+
+  object-fit: fill;
+
+  opacity: 1;
+
+  pointer-events: none;
+
+  user-select: none;
+
+  transition:
+    opacity 450ms ease;
+}
+
+
+
+/* ======================================================
+   VIDEO
+====================================================== */
+
+#cut-inner-bg-video {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 1;
+
+  display: block;
+
+  width: 2560px;
+  height: 1440px;
+
+  max-width: none;
+  max-height: none;
+
+  object-fit: fill;
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  background: #000;
+
+  transition:
+    opacity 450ms ease;
+}
+
+
+
+/* ======================================================
+   BG2 → VIDEO
+====================================================== */
+
+#cut-inner-thought-overlay.is-video-phase
+#cut-inner-bg-image {
+  opacity: 0;
+}
+
+
+
+#cut-inner-thought-overlay.is-video-phase
+#cut-inner-bg-video {
+  opacity: 1;
+}
+
+
+
+/* ======================================================
+   WORD FIELD
+====================================================== */
+
+#cut-inner-thought-word-layer {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 3;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+
+  pointer-events: auto;
+
+  opacity: 1;
+
+  contain:
+    layout
+    paint
+    style;
+
+  transition:
+    opacity 400ms ease;
+}
+
+
+
+#cut-inner-thought-word-layer.is-leaving {
+  opacity: 0;
+
+  pointer-events: none;
+}
+
+
+
+/* ======================================================
+   FLOATING WORD
+
+   CONTENT, NOT CAMERA UI.
+   KEPT AS-IS.
+====================================================== */
+
+.cut-inner-word {
+  position: absolute;
+
+  left: 0;
+  top: 0;
+
+  display: block;
+
+  white-space: nowrap;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-weight: 400;
+
+  line-height: 1;
+
+  pointer-events: auto;
+
+  cursor: pointer;
+
+  user-select: none;
+
+  transform-origin:
+    center
+    center;
+
+  will-change:
+    transform;
+
+  -webkit-tap-highlight-color:
+    transparent;
+}
+
+
+
+/* ======================================================
+   WORD VISUAL
+====================================================== */
+
+.cut-inner-word-visual {
+  display: block;
+
+  pointer-events: none;
+
+  transform:
+    scale(
+      1
+    );
+
+  transform-origin:
+    center
+    center;
+
+  text-shadow:
+    0
+    0
+    4px
+    currentColor;
+}
+
+
+
+.cut-inner-word:hover
+.cut-inner-word-visual {
+  transform:
+    scale(
+      1.06
+    );
+}
+
+
+
+/* ======================================================
+   WORD POP
+====================================================== */
+
+.cut-inner-word.is-popping {
+  pointer-events: none;
+}
+
+
+
+.cut-inner-word.is-popping
+.cut-inner-word-visual {
+  animation:
+    cut-inner-word-pop
+    270ms
+    cubic-bezier(
+      0.18,
+      0.8,
+      0.24,
+      1
+    )
+    forwards;
+}
+
+
+
+@keyframes cut-inner-word-pop {
+
+  0% {
+    opacity: 1;
+
+    transform:
+      scale(
+        1
+      );
+  }
+
+
+  55% {
+    opacity: 1;
+
+    transform:
+      scale(
+        1.45
+      );
+  }
+
+
+  100% {
+    opacity: 0;
+
+    transform:
+      scale(
+        1.9
+      );
+  }
+
+}
+
+
+
+/* ======================================================
+   CUT CHAT TEXT
+====================================================== */
+
+#cut-inner-chattext {
+  position: absolute;
+
+  z-index: 6;
+
+  left: 50%;
+
+  top: 135px;
+
+  display: block;
+
+  width: 38%;
+
+  height: auto;
+
+  max-width: none;
+  max-height: none;
+
+  opacity: 0;
+
+  visibility: hidden;
+
+  pointer-events: none;
+
+  user-select: none;
+
+  cursor: default;
+
+  transform:
+    translateX(
+      -50%
+    )
+    translateY(
+      8px
+    );
+
+  filter:
+    drop-shadow(
+      0
+      6px
+      18px
+      rgba(
+        0,
+        0,
+        0,
+        0.40
+      )
+    );
+
+  transition:
+    opacity 300ms ease,
+    visibility 300ms ease,
+    transform 300ms ease;
+}
+
+
+
+/* ======================================================
+   CHAT VISIBLE
+====================================================== */
+
+#cut-inner-chattext.is-visible {
+  opacity: 1;
+
+  visibility: visible;
+
+  transform:
+    translateX(
+      -50%
+    )
+    translateY(
+      0
+    );
+}
+
+
+
+/* ======================================================
+   CHAT SWAP
+====================================================== */
+
+#cut-inner-chattext.is-swapping {
+  opacity: 0;
+
+  visibility: hidden;
+
+  transform:
+    translateX(
+      -50%
+    )
+    translateY(
+      8px
+    );
+}
+
+
+
+/* ======================================================
+   CHAT CLICKABLE
+====================================================== */
+
+#cut-inner-chattext.is-visible.is-clickable {
+  pointer-events: auto;
+
+  cursor: pointer;
+}
+
+
+
+/* ======================================================
+   VIDEO / CHAT MODE
+====================================================== */
+
+body.cut-chat-active
+.cut-mode-hint {
+  opacity: 0 !important;
+
+  visibility: hidden !important;
+
+  pointer-events: none !important;
+}
+
+
+
+/* ======================================================
+   OLD SILK CAN'T RECEIVE INPUT
+====================================================== */
+
+body.cut-chat-active
+#cut-silk-mount,
+
+body.cut-chat-active
+#cut-silk-mount canvas {
+  pointer-events: none !important;
+}
+
+
+
+/* ======================================================
+   FINAL CUT ISOLATION
+====================================================== */
+
+body:not(.cut-active)
+#cut-window * {
+  pointer-events: none !important;
+}
+
+
+
+body:not(.cut-active)
+#cut-thought-input {
+  cursor: default !important;
+
+  user-select: none !important;
+}
+
+
+
+body.cut-active
+.cut-input-panel:not(.is-hidden)
+#cut-thought-input {
+  pointer-events: auto;
+}
+
+
+
+body.cut-active
+.cut-input-panel:not(.is-hidden)
+.cut-input-button {
+  pointer-events: auto;
+}
+
+
+
+body.cut-active
+#cut-silk-mount {
+  pointer-events: auto;
+}
+
+
+
+body.cut-active
+#cut-silk-mount canvas {
+  pointer-events: auto;
+}
+
+
+
+body.cut-active.cut-chat-active
+#cut-silk-mount,
+
+body.cut-active.cut-chat-active
+#cut-silk-mount canvas {
+  pointer-events: none !important;
+}

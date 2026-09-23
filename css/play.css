@@ -1,0 +1,499 @@
+/* ======================================================
+   MỜI TỪ ĐÀN
+   PLAY SCENE
+====================================================== */
+
+
+/* ======================================================
+   EASY POSITION TWEAKS
+====================================================== */
+
+#play-window {
+
+
+  /* ==================================================
+     SILK STRING 1
+  ================================================== */
+
+  --play-string-left:
+    655px;
+
+
+
+  /* ==================================================
+     SILK STRING 2
+  ================================================== */
+
+  --play-string-middle:
+    685px;
+
+
+
+  /* ==================================================
+     SILK STRING 3
+  ================================================== */
+
+  --play-string-right:
+    715px;
+
+
+
+  /* ==================================================
+     STRING VERTICAL AREA
+  ================================================== */
+
+  --play-string-top:
+    0px;
+
+  --play-string-height:
+    1440px;
+
+
+
+  /* ==================================================
+     INVISIBLE INTERACTION WIDTH
+
+     The strings are only 30px apart now,
+     so keep this fairly narrow.
+
+     This does NOT change visible thickness.
+  ================================================== */
+
+  --play-string-hit-width:
+    20px;
+
+
+
+  /* ==================================================
+     WORM POSITION
+  ================================================== */
+
+  --play-worm-left:
+    1769px;
+
+  --play-worm-top:
+    645px;
+
+  --play-worm-width:
+    275px;
+
+  --play-worm-height:
+    487px;
+
+
+
+  /* ==================================================
+     PLAY TEXT 1
+
+     left:
+     bigger = move right
+     smaller = move left
+
+     top:
+     bigger = move down
+     smaller = move up
+
+     width:
+     controls PNG size
+  ================================================== */
+
+  --play-text1-left:
+    74%;
+
+  --play-text1-top:
+    270px;
+
+  --play-text1-width:
+    450px;
+
+}
+
+
+
+/* ======================================================
+   PLAY WINDOW
+====================================================== */
+
+#play-window {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 2;
+
+  width: 2560px;
+  height: 1440px;
+
+  overflow: hidden;
+
+  background: #000;
+
+  opacity: 0;
+
+  visibility: hidden;
+
+  pointer-events: none;
+
+  transition:
+    opacity 500ms ease,
+    visibility 500ms ease;
+}
+
+
+
+/* ======================================================
+   SCENE ISOLATION
+====================================================== */
+
+body:not(.play-active)
+#play-window,
+
+body:not(.play-active)
+#play-window * {
+  pointer-events: none !important;
+}
+
+
+
+/* ======================================================
+   PLAY ACTIVE
+====================================================== */
+
+body.play-active
+#play-window {
+  opacity: 1;
+
+  visibility: visible;
+
+  pointer-events: auto;
+
+  cursor: crosshair;
+}
+
+
+
+/* ======================================================
+   PLAY BOARD
+====================================================== */
+
+#play-board {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  z-index: 1;
+
+  width: 2560px;
+  height: 1440px;
+
+  overflow: hidden;
+
+  transform:
+    translate(
+      -50%,
+      -50%
+    );
+
+  transform-origin:
+    center center;
+
+  pointer-events: none;
+
+  user-select: none;
+}
+
+
+
+/* ======================================================
+   PLAY BG 3
+====================================================== */
+
+#play-bg3 {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 1;
+
+  display: block;
+
+  width: 2560px;
+  height: 1440px;
+
+  max-width: none;
+  max-height: none;
+
+  object-fit: fill;
+
+  user-select: none;
+
+  pointer-events: none;
+}
+
+
+
+/* ======================================================
+   PLAY WORM
+====================================================== */
+
+#play-worm {
+  position: absolute;
+
+  z-index: 2;
+
+  left:
+    var(
+      --play-worm-left
+    );
+
+  top:
+    var(
+      --play-worm-top
+    );
+
+  display: block;
+
+  width:
+    var(
+      --play-worm-width
+    );
+
+  height:
+    var(
+      --play-worm-height
+    );
+
+  max-width: none;
+  max-height: none;
+
+  object-fit: contain;
+
+  transform:
+    translate3d(
+      0,
+      0,
+      0
+    )
+    rotate(0deg);
+
+  transform-origin:
+    50%
+    78%;
+
+  will-change:
+    transform;
+
+  user-select: none;
+
+  pointer-events: none;
+}
+
+
+
+/* ======================================================
+   PLAY BG 1
+====================================================== */
+
+#play-bg1 {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 3;
+
+  display: block;
+
+  width: 2560px;
+  height: 1440px;
+
+  max-width: none;
+  max-height: none;
+
+  object-fit: fill;
+
+  user-select: none;
+
+  pointer-events: none;
+}
+
+
+
+/* ======================================================
+   P5 SILK MOUNT
+====================================================== */
+
+#play-silk-mount {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 4;
+
+  width: 2560px;
+  height: 1440px;
+
+  overflow: hidden;
+
+  pointer-events: none;
+}
+
+
+
+/* ======================================================
+   P5 CANVAS
+====================================================== */
+
+#play-silk-mount canvas {
+  position: absolute !important;
+
+  left: 0 !important;
+  top: 0 !important;
+
+  display: block !important;
+
+  width: 2560px !important;
+  height: 1440px !important;
+
+  max-width: none !important;
+  max-height: none !important;
+
+  border: 0 !important;
+
+  outline: 0 !important;
+
+  background:
+    transparent !important;
+
+  pointer-events:
+    none !important;
+
+  image-rendering:
+    auto;
+}
+
+
+
+/* ======================================================
+   PLAY TEXT 1
+
+   Hidden at first.
+
+   endFlow.js adds .is-visible about 5 seconds
+   after PLAY starts.
+====================================================== */
+
+#play-text1 {
+  position: absolute;
+
+  z-index: 20;
+
+  left:
+    var(
+      --play-text1-left
+    );
+
+  top:
+    var(
+      --play-text1-top
+    );
+
+  display: block;
+
+  width:
+    var(
+      --play-text1-width
+    );
+
+  height: auto;
+
+  max-width: none;
+  max-height: none;
+
+  opacity: 0;
+
+  visibility: hidden;
+
+  pointer-events: none;
+
+  user-select: none;
+
+  cursor: pointer;
+
+  transform:
+    translateX(
+      -50%
+    )
+    translateY(
+      8px
+    );
+
+  transition:
+    opacity 340ms ease,
+    visibility 340ms ease,
+    transform 340ms ease;
+}
+
+
+
+/* ======================================================
+   PLAY TEXT 1 VISIBLE
+====================================================== */
+
+body.play-active
+#play-text1.is-visible {
+  opacity: 1;
+
+  visibility: visible;
+
+  pointer-events: auto;
+
+  transform:
+    translateX(
+      -50%
+    )
+    translateY(
+      0
+    );
+}
+
+
+
+/* ======================================================
+   NO PLAY TEXT HOVER EFFECT
+====================================================== */
+
+body.play-active
+#play-text1.is-visible:hover {
+  filter: none;
+
+  box-shadow: none;
+}
+
+
+
+/* ======================================================
+   DRAW TEXT 1 → PLAY
+====================================================== */
+
+body.draw-active.draw-video2-phase.draw-video2-visible
+#draw-textbox.is-visible:not(.is-intro) {
+  pointer-events: auto;
+
+  cursor: pointer;
+}
+
+
+
+/* ======================================================
+   NO HOVER EFFECT
+====================================================== */
+
+body.draw-active.draw-video2-phase.draw-video2-visible
+#draw-textbox.is-visible:not(.is-intro):hover {
+  filter:
+    none !important;
+
+  box-shadow:
+    none !important;
+}

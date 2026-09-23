@@ -1,0 +1,681 @@
+/* ======================================================
+   MỜI TỪ ĐÀN
+   ROOM / TANGLE SCENE
+====================================================== */
+
+
+/* ======================================================
+   ROOM WINDOW
+====================================================== */
+
+#room-window {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 2;
+
+  width: 2560px;
+  height: 1440px;
+
+  overflow: hidden;
+
+  background: #000;
+
+  opacity: 0;
+
+  visibility: hidden;
+
+  pointer-events: none;
+
+  transition:
+    opacity 600ms ease,
+    visibility 600ms ease;
+}
+
+
+body.room-active
+#room-window {
+  opacity: 1;
+
+  visibility: visible;
+
+  pointer-events: auto;
+}
+
+
+
+/* ======================================================
+   ROOM CAMERA BOARD
+
+   sketch.js already gives this the same camera transform
+   as INTRO and TALK.
+
+   Therefore ROOM still supports:
+
+   mouse pan
+   mouse zoom
+   hand pan
+   hand zoom
+====================================================== */
+
+#room-board {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: 2560px;
+  height: 1440px;
+
+  transform:
+    translate(
+      -50%,
+      -50%
+    )
+    scale(1);
+
+  transform-origin:
+    center center;
+
+  will-change:
+    transform;
+
+  user-select: none;
+}
+
+
+
+/* ======================================================
+   FULL SCREEN ROOM IMAGE
+====================================================== */
+
+.room-full-image {
+  position: absolute;
+
+  inset: 0;
+
+  display: block;
+
+  width: 2560px;
+  height: 1440px;
+
+  object-fit: fill;
+
+  user-select: none;
+
+  pointer-events: none;
+}
+
+
+
+/* ======================================================
+   LAYER ORDER
+
+   BOTTOM
+   ↓
+   Room_[time]1 / Room_[time]2
+   left door
+   right door
+   invisible hotspot
+   worm
+   TOP
+
+   ROOM text remains outside room-board.
+====================================================== */
+
+.room-scene-image {
+  z-index: 1;
+}
+
+
+.room-door-left {
+  z-index: 3;
+}
+
+
+.room-door-right {
+  z-index: 4;
+}
+
+
+.room-door-hotspot {
+  z-index: 6;
+}
+
+
+.room-worm {
+  z-index: 7;
+}
+
+
+
+/* ======================================================
+   ROOM MAIN SCENE IMAGE
+
+   This is used for:
+
+   Room_dawn1 → Room_dawn2
+   Room_morning1 → Room_morning2
+   Room_dusk1 → Room_dusk2
+   Room_night1 → Room_night2
+
+   Unlike the TALK character change,
+   ROOM uses a cinematic fade transition.
+====================================================== */
+
+.room-scene-image {
+  opacity: 1;
+
+  transition:
+    opacity 600ms ease;
+
+  will-change:
+    opacity;
+}
+
+
+
+/* ======================================================
+   ROOM IMAGE FADE OUT
+====================================================== */
+
+.room-scene-image.is-scene-fading {
+  opacity: 0;
+}
+
+
+
+/* ======================================================
+   DOORS
+====================================================== */
+
+.room-door {
+  position: absolute;
+
+  inset: 0;
+
+  display: block;
+
+  width: 2560px;
+  height: 1440px;
+
+  object-fit: fill;
+
+  user-select: none;
+
+  pointer-events: none;
+
+  will-change:
+    transform,
+    opacity;
+
+  transition:
+    transform
+    1000ms
+    cubic-bezier(
+      0.22,
+      0.75,
+      0.18,
+      1
+    ),
+    opacity
+    450ms
+    ease;
+}
+
+
+
+/* ======================================================
+   CLOSED DOORS
+====================================================== */
+
+.room-door-left {
+  transform:
+    translate3d(
+      0,
+      0,
+      0
+    );
+}
+
+
+.room-door-right {
+  transform:
+    translate3d(
+      0,
+      0,
+      0
+    );
+}
+
+
+
+/* ======================================================
+   OPEN DOORS
+
+   Left PNG exits to the left.
+   Right PNG exits to the right.
+====================================================== */
+
+#room-window.doors-open
+.room-door-left {
+  transform:
+    translate3d(
+      -100%,
+      0,
+      0
+    );
+}
+
+
+#room-window.doors-open
+.room-door-right {
+  transform:
+    translate3d(
+      100%,
+      0,
+      0
+    );
+}
+
+
+
+/* ======================================================
+   INVISIBLE CIRCULAR HOTSPOT
+
+   IMPORTANT:
+
+   There is NO visible circle now.
+
+   The button is still here and clickable,
+   but completely transparent.
+
+   It sits in the exact middle of the scene.
+====================================================== */
+
+.room-door-hotspot {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: 220px;
+  height: 220px;
+
+  padding: 0;
+
+  border: 0;
+
+  border-radius: 50%;
+
+  background: transparent;
+
+  opacity: 0;
+
+  transform:
+    translate(
+      -50%,
+      -50%
+    );
+
+  cursor: pointer;
+
+  pointer-events: auto;
+}
+
+
+
+/* ======================================================
+   REMOVE THE OLD VISIBLE DOT
+
+   You do NOT need to delete the span from index.html.
+   It is simply never displayed.
+====================================================== */
+
+.room-hotspot-dot {
+  display: none;
+}
+
+
+
+/* ======================================================
+   HOTSPOT STOPS WORKING AFTER OPENING
+====================================================== */
+
+#room-window.doors-open
+.room-door-hotspot {
+  pointer-events: none;
+}
+
+
+
+/* ======================================================
+   ROOM WORM
+
+   ORIGINAL PNG SIZE:
+
+   467 × 566
+
+   Hidden until Room text3.
+====================================================== */
+
+.room-worm {
+  position: absolute;
+
+  width: 467px;
+  height: 566px;
+
+  display: block;
+
+  object-fit: contain;
+
+  user-select: none;
+
+  pointer-events: none;
+
+  opacity: 0;
+
+  transform-origin:
+    center center;
+
+  will-change:
+    transform,
+    opacity;
+}
+
+
+
+/* ======================================================
+   !!! WORM POSITION — TWEAK HERE !!!
+
+   These are the values you can edit.
+
+   right:
+   smaller / negative = farther to the right
+   bigger = farther toward center
+
+   top:
+   smaller = higher
+   bigger = lower
+
+   Each time period is separated so you can later
+   position them differently if the PNGs need it.
+====================================================== */
+
+
+/* ======================================================
+   DAWN WORM POSITION
+====================================================== */
+
+#room-window[data-environment="dawn"]
+.room-worm {
+
+  right: -30px;
+
+  top: 420px;
+
+}
+
+
+
+/* ======================================================
+   MORNING WORM POSITION
+====================================================== */
+
+#room-window[data-environment="morning"]
+.room-worm {
+
+  right: -30px;
+
+  top: 420px;
+
+}
+
+
+
+/* ======================================================
+   DUSK WORM POSITION
+====================================================== */
+
+#room-window[data-environment="dusk"]
+.room-worm {
+
+  right: -30px;
+
+  top: 420px;
+
+}
+
+
+
+/* ======================================================
+   NIGHT WORM POSITION
+====================================================== */
+
+#room-window[data-environment="night"]
+.room-worm {
+
+  right: -30px;
+
+  top: 420px;
+
+}
+
+
+
+/* ======================================================
+   WORM POP FROM RIGHT
+
+   It begins outside / farther right,
+   then moves LEFT into its final position.
+====================================================== */
+
+.room-worm.is-visible {
+  animation:
+    room-worm-pop-from-right
+    1050ms
+    cubic-bezier(
+      0.16,
+      0.78,
+      0.2,
+      1
+    )
+    forwards;
+}
+
+
+
+@keyframes room-worm-pop-from-right {
+
+  0% {
+
+    opacity: 0;
+
+    transform:
+      translate3d(
+        280px,
+        30px,
+        0
+      )
+      rotate(5deg)
+      scale(0.92);
+
+  }
+
+
+  60% {
+
+    opacity: 1;
+
+    transform:
+      translate3d(
+        -14px,
+        -4px,
+        0
+      )
+      rotate(-1deg)
+      scale(1.02);
+
+  }
+
+
+  78% {
+
+    opacity: 1;
+
+    transform:
+      translate3d(
+        5px,
+        1px,
+        0
+      )
+      rotate(0.4deg)
+      scale(0.995);
+
+  }
+
+
+  100% {
+
+    opacity: 1;
+
+    transform:
+      translate3d(
+        0,
+        0,
+        0
+      )
+      rotate(0deg)
+      scale(1);
+
+  }
+
+}
+
+
+
+/* ======================================================
+   ROOM TEXT
+
+   Width and horizontal position remain identical
+   to INTRO and TALK.
+====================================================== */
+
+.room-textbox {
+  position: absolute;
+
+  z-index: 28;
+
+  left: 1222.5px;
+
+  width: 973px;
+  height: auto;
+
+  max-width: none;
+  max-height: none;
+
+  display: block;
+
+  opacity: 0;
+
+  visibility: hidden;
+
+  pointer-events: none;
+
+  cursor: pointer;
+
+  user-select: none;
+
+  transform:
+    translateX(-50%);
+
+  transform-origin:
+    center center;
+
+  transition:
+    opacity 340ms ease,
+    visibility 340ms ease;
+
+  filter:
+    drop-shadow(
+      0
+      5px
+      16px
+      rgba(
+        0,
+        0,
+        0,
+        0.45
+      )
+    );
+}
+
+
+
+/* ======================================================
+   ROOM TEXT 1
+
+   TOP POSITION.
+
+   Keep this separately tweakable because Room text1
+   is intentionally at the top of the composition.
+
+   !!! TWEAK TOP POSITION HERE IF NEEDED !!!
+====================================================== */
+
+.room-textbox.is-top {
+
+  top: 135px;
+
+  bottom: auto;
+
+}
+
+
+
+/* ======================================================
+   ROOM TEXT 2 + 3
+
+   Same position as INTRO/TALK text.
+====================================================== */
+
+.room-textbox.is-bottom {
+
+  top: auto;
+
+  bottom: 359px;
+
+}
+
+
+
+/* ======================================================
+   TEXT VISIBLE
+====================================================== */
+
+body.room-active
+.room-textbox.is-visible {
+
+  opacity: 1;
+
+  visibility: visible;
+
+  pointer-events: auto;
+
+}
+
+
+
+/* ======================================================
+   TEXT FADE
+====================================================== */
+
+body.room-active
+.room-textbox.is-visible.is-swapping {
+
+  opacity: 0;
+
+  pointer-events: none;
+
+}

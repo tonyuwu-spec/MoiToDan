@@ -1,0 +1,1146 @@
+/* ======================================================
+   MỜI TỪ ĐÀN
+   DRAW SCENE
+====================================================== */
+
+
+/* ======================================================
+   EASY POSITION TWEAKS
+====================================================== */
+
+#draw-window {
+
+
+  /* ==================================================
+     LEFT INVISIBLE SILK HOTSPOT
+  ================================================== */
+
+  --draw-silk-hotspot-left:
+    450px;
+
+  --draw-silk-hotspot-top:
+    200px;
+
+  --draw-silk-hotspot-width:
+    170px;
+
+  --draw-silk-hotspot-height:
+    330px;
+
+
+
+  /* ==================================================
+     RIGHT INVISIBLE PEN HOTSPOT
+  ================================================== */
+
+  --draw-pen-hotspot-right:
+    570px;
+
+  --draw-pen-hotspot-top:
+    675px;
+
+  --draw-pen-hotspot-width:
+    190px;
+
+  --draw-pen-hotspot-height:
+    500px;
+
+
+
+  /* ==================================================
+     HOTSPOT DEBUG
+  ================================================== */
+
+  --draw-hotspot-debug-opacity:
+    0;
+
+
+
+  /* ==================================================
+     DRAW CONTROL BAR
+  ================================================== */
+
+  --draw-controls-top:
+    145px;
+
+
+
+  /* ==================================================
+     MODE INDICATOR
+  ================================================== */
+
+  --draw-mode-bottom:
+    330px;
+
+
+
+  /* ==================================================
+     INTRO DIALOGUE
+  ================================================== */
+
+  --draw-intro-text-top:
+    170px;
+
+  --draw-intro-text-width:
+    860px;
+
+}
+
+
+
+/* ======================================================
+   DRAW WINDOW
+====================================================== */
+
+#draw-window {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 2;
+
+  width: 2560px;
+  height: 1440px;
+
+  overflow: hidden;
+
+  background: #000;
+
+  opacity: 0;
+
+  visibility: hidden;
+
+  pointer-events: none;
+
+  transition:
+    opacity 500ms ease,
+    visibility 500ms ease;
+}
+
+
+
+/* ======================================================
+   SCENE ISOLATION
+====================================================== */
+
+body:not(.draw-active)
+#draw-window,
+
+body:not(.draw-active)
+#draw-window * {
+  pointer-events: none !important;
+}
+
+
+
+/* ======================================================
+   DRAW ACTIVE
+====================================================== */
+
+body.draw-active
+#draw-window {
+  opacity: 1;
+
+  visibility: visible;
+
+  pointer-events: auto;
+}
+
+
+
+/* ======================================================
+   DRAW BOARD
+====================================================== */
+
+#draw-board {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  z-index: 1;
+
+  width: 2560px;
+  height: 1440px;
+
+  overflow: hidden;
+
+  transform:
+    translate(
+      -50%,
+      -50%
+    );
+
+  transform-origin:
+    center center;
+
+  pointer-events: none;
+
+  user-select: none;
+
+  will-change:
+    transform;
+}
+
+
+
+/* ======================================================
+   BLACK TRANSITION BACKGROUND
+====================================================== */
+
+#draw-board::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 0;
+
+  background: #000;
+
+  pointer-events: none;
+}
+
+
+
+/* ======================================================
+   DRAW BACKGROUND
+====================================================== */
+
+.draw-bg {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 1;
+
+  display: block;
+
+  width: 2560px;
+  height: 1440px;
+
+  max-width: none;
+  max-height: none;
+
+  object-fit: fill;
+
+  opacity: 1;
+
+  pointer-events: none;
+
+  user-select: none;
+
+  transition:
+    opacity 600ms ease;
+}
+
+
+
+/* ======================================================
+   DRAW VIDEOS
+====================================================== */
+
+.draw-video {
+  position: absolute;
+
+  inset: 0;
+
+  display: block;
+
+  width: 2560px;
+  height: 1440px;
+
+  max-width: none;
+  max-height: none;
+
+  object-fit: fill;
+
+  background: #000;
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  user-select: none;
+
+  transition:
+    opacity 600ms ease;
+}
+
+
+#draw-video1 {
+  z-index: 2;
+}
+
+
+#draw-video2 {
+  z-index: 3;
+}
+
+
+
+/* ======================================================
+   INTRO PHASE
+====================================================== */
+
+body.draw-active.draw-intro
+#draw-bg {
+  opacity: 1;
+}
+
+
+body.draw-active.draw-intro
+#draw-video1,
+
+body.draw-active.draw-intro
+#draw-video2 {
+  opacity: 0;
+}
+
+
+
+/* ======================================================
+   DRAWING PHASE
+====================================================== */
+
+body.draw-active.draw-drawing
+#draw-bg {
+  opacity: 1;
+}
+
+
+body.draw-active.draw-drawing
+#draw-video1,
+
+body.draw-active.draw-drawing
+#draw-video2 {
+  opacity: 0;
+}
+
+
+
+/* ======================================================
+   VIDEO 1
+====================================================== */
+
+body.draw-active.draw-video1-phase
+#draw-bg {
+  opacity: 0;
+}
+
+
+body.draw-active.draw-video1-phase
+#draw-video1 {
+  opacity: 1;
+}
+
+
+body.draw-active.draw-video1-phase
+#draw-video2 {
+  opacity: 0;
+}
+
+
+
+/* ======================================================
+   VIDEO 1 FADE
+====================================================== */
+
+body.draw-active.draw-video1-phase.draw-video1-fading
+#draw-video1 {
+  opacity: 0;
+}
+
+
+
+/* ======================================================
+   VIDEO 2
+====================================================== */
+
+body.draw-active.draw-video2-phase
+#draw-bg,
+
+body.draw-active.draw-video2-phase
+#draw-video1 {
+  opacity: 0;
+}
+
+
+body.draw-active.draw-video2-phase
+#draw-video2 {
+  opacity: 0;
+}
+
+
+body.draw-active.draw-video2-phase.draw-video2-visible
+#draw-video2 {
+  opacity: 1;
+}
+
+
+
+/* ======================================================
+   P5 PAPER MOUNT
+====================================================== */
+
+#draw-paper-mount {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 6;
+
+  width: 2560px;
+  height: 1440px;
+
+  overflow: hidden;
+
+  opacity: 0;
+
+  visibility: hidden;
+
+  pointer-events: none;
+
+  transform:
+    translate3d(
+      0,
+      0,
+      0
+    );
+
+  transition:
+    opacity 520ms ease,
+    visibility 320ms ease,
+    transform
+      780ms
+      cubic-bezier(
+        0.36,
+        0.01,
+        0.20,
+        1
+      );
+
+  will-change:
+    transform,
+    opacity;
+}
+
+
+
+/* ======================================================
+   PAPER ACTIVE
+====================================================== */
+
+body.draw-active.draw-drawing
+#draw-paper-mount {
+  opacity: 1;
+
+  visibility: visible;
+
+  pointer-events: auto;
+}
+
+
+
+/* ======================================================
+   FINISH
+====================================================== */
+
+body.draw-active.draw-drawing.draw-finishing
+#draw-paper-mount {
+  transform:
+    translate3d(
+      0,
+      1050px,
+      0
+    );
+
+  opacity: 0;
+
+  pointer-events: none;
+}
+
+
+
+/* ======================================================
+   P5 CANVAS
+====================================================== */
+
+#draw-paper-mount canvas {
+  position: absolute !important;
+
+  left: 0 !important;
+  top: 0 !important;
+
+  display: block !important;
+
+  width: 2560px !important;
+  height: 1440px !important;
+
+  max-width: none !important;
+  max-height: none !important;
+
+  border: 0 !important;
+
+  outline: 0 !important;
+
+  background:
+    transparent !important;
+
+  pointer-events: none;
+
+  touch-action: none;
+
+  image-rendering:
+    auto;
+}
+
+
+body.draw-active.draw-drawing
+#draw-paper-mount canvas {
+  pointer-events: auto;
+}
+
+
+
+/* ======================================================
+   INVISIBLE BRUSH HOTSPOTS
+====================================================== */
+
+.draw-brush-hotspot {
+  position: absolute;
+
+  z-index: 18;
+
+  padding: 0;
+
+  margin: 0;
+
+  border:
+    2px dashed
+    rgba(
+      255,
+      255,
+      255,
+      0.90
+    );
+
+  border-radius: 0;
+
+  outline: none;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.16
+    );
+
+  opacity:
+    var(
+      --draw-hotspot-debug-opacity
+    );
+
+  cursor: pointer;
+
+  pointer-events: none;
+
+  -webkit-tap-highlight-color:
+    transparent;
+}
+
+
+
+/* ======================================================
+   SILK HOTSPOT
+====================================================== */
+
+#draw-silk-hotspot {
+  left:
+    var(
+      --draw-silk-hotspot-left
+    );
+
+  top:
+    var(
+      --draw-silk-hotspot-top
+    );
+
+  width:
+    var(
+      --draw-silk-hotspot-width
+    );
+
+  height:
+    var(
+      --draw-silk-hotspot-height
+    );
+}
+
+
+
+/* ======================================================
+   PEN HOTSPOT
+====================================================== */
+
+#draw-pen-hotspot {
+  right:
+    var(
+      --draw-pen-hotspot-right
+    );
+
+  top:
+    var(
+      --draw-pen-hotspot-top
+    );
+
+  width:
+    var(
+      --draw-pen-hotspot-width
+    );
+
+  height:
+    var(
+      --draw-pen-hotspot-height
+    );
+}
+
+
+
+/* ======================================================
+   DEBUG LABELS
+====================================================== */
+
+.draw-brush-hotspot::after {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  transform:
+    translate(
+      -50%,
+      -50%
+    );
+
+  color: white;
+
+  font-size: 22px;
+
+  font-weight: 900;
+
+  white-space: nowrap;
+
+  pointer-events: none;
+}
+
+
+#draw-silk-hotspot::after {
+  content: "SILK";
+}
+
+
+#draw-pen-hotspot::after {
+  content: "PEN";
+}
+
+
+
+/* ======================================================
+   HOTSPOTS ACTIVE ONLY DURING DRAWING
+====================================================== */
+
+body.draw-active.draw-drawing:not(.draw-finishing)
+.draw-brush-hotspot {
+  pointer-events: auto;
+}
+
+
+
+/* ======================================================
+   CONTROL BAR
+
+   SHARP / TECHNICAL / NO GLASS BLUR.
+====================================================== */
+
+#draw-controls {
+  position: absolute;
+
+  z-index: 22;
+
+  left: 50%;
+
+  top:
+    var(
+      --draw-controls-top
+    );
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  padding:
+    7px;
+
+  border:
+    2px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.84
+    );
+
+  border-radius: 0;
+
+  background:
+    rgba(
+      5,
+      5,
+      5,
+      0.76
+    );
+
+  opacity: 0;
+
+  visibility: hidden;
+
+  pointer-events: none;
+
+  transform:
+    translateX(
+      -50%
+    );
+
+  transition:
+    opacity 260ms ease,
+    visibility 260ms ease;
+}
+
+
+body.draw-active.draw-drawing
+#draw-controls {
+  opacity: 1;
+
+  visibility: visible;
+
+  pointer-events: auto;
+}
+
+
+
+/* ======================================================
+   CONTROLS LEAVE DURING FINISH
+====================================================== */
+
+body.draw-active.draw-drawing.draw-finishing
+#draw-controls {
+  opacity: 0;
+
+  visibility: hidden;
+
+  pointer-events: none;
+}
+
+
+
+/* ======================================================
+   CONTROL BUTTON
+====================================================== */
+
+.draw-control-button {
+  min-height: 46px;
+
+  padding:
+    0
+    18px;
+
+  border:
+    2px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.72
+    );
+
+  border-radius: 0;
+
+  outline: none;
+
+  background:
+    rgba(
+      0,
+      0,
+      0,
+      0.26
+    );
+
+  color: white;
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    monospace;
+
+  font-size: 13px;
+
+  font-weight: 900;
+
+  letter-spacing:
+    0.04em;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  pointer-events: auto;
+
+  transition:
+    background 140ms ease,
+    color 140ms ease,
+    border-color 140ms ease,
+    transform 100ms ease;
+}
+
+
+.draw-control-button:hover {
+  background: white;
+
+  color: black;
+
+  border-color: white;
+}
+
+
+.draw-control-button:active {
+  transform:
+    translateY(
+      2px
+    );
+}
+
+
+.draw-control-button.active {
+  background: white;
+
+  color: black;
+
+  border-color: white;
+}
+
+
+
+/* ======================================================
+   FINISH BUTTON
+====================================================== */
+
+#draw-finish-button {
+  background: white;
+
+  color: black;
+}
+
+
+#draw-finish-button:hover {
+  background: black;
+
+  color: white;
+}
+
+
+
+/* ======================================================
+   MODE INDICATOR
+====================================================== */
+
+#draw-mode-indicator {
+  position: absolute;
+
+  z-index: 21;
+
+  left: 50%;
+
+  bottom:
+    var(
+      --draw-mode-bottom
+    );
+
+  padding:
+    11px
+    19px;
+
+  border:
+    2px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.72
+    );
+
+  border-radius: 0;
+
+  background:
+    rgba(
+      5,
+      5,
+      5,
+      0.74
+    );
+
+  color: white;
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    monospace;
+
+  font-size: 13px;
+
+  letter-spacing:
+    0.045em;
+
+  white-space: nowrap;
+
+  opacity: 0;
+
+  visibility: hidden;
+
+  pointer-events: none;
+
+  user-select: none;
+
+  transform:
+    translateX(
+      -50%
+    );
+
+  transition:
+    opacity 260ms ease,
+    visibility 260ms ease;
+}
+
+
+body.draw-active.draw-drawing
+#draw-mode-indicator {
+  opacity: 1;
+
+  visibility: visible;
+}
+
+
+body.draw-active.draw-drawing.draw-finishing
+#draw-mode-indicator {
+  opacity: 0;
+
+  visibility: hidden;
+}
+
+
+
+/* ======================================================
+   DRAW TEXTBOX BASE
+====================================================== */
+
+#draw-textbox {
+  position: absolute;
+
+  z-index: 29;
+
+  display: block;
+
+  height: auto;
+
+  max-width: none;
+  max-height: none;
+
+  opacity: 0;
+
+  visibility: hidden;
+
+  user-select: none;
+
+  pointer-events: none;
+
+  transition:
+    opacity 340ms ease,
+    visibility 340ms ease,
+    transform 340ms ease;
+}
+
+
+
+/* ======================================================
+   DRAW TEXT 0
+====================================================== */
+
+#draw-textbox.is-intro {
+  left: 50%;
+
+  top:
+    var(
+      --draw-intro-text-top
+    );
+
+  right: auto;
+
+  bottom: auto;
+
+  width:
+    var(
+      --draw-intro-text-width
+    );
+
+  transform:
+    translate(
+      -50%,
+      8px
+    );
+}
+
+
+
+/* ======================================================
+   DRAW TEXT 0 VISIBLE
+====================================================== */
+
+body.draw-active.draw-intro
+#draw-textbox.is-intro.is-visible {
+  opacity: 1;
+
+  visibility: visible;
+
+  pointer-events: auto;
+
+  cursor: pointer;
+
+  transform:
+    translate(
+      -50%,
+      0
+    );
+}
+
+
+
+/* ======================================================
+   NO HOVER EFFECT
+====================================================== */
+
+body.draw-active.draw-intro
+#draw-textbox.is-intro.is-visible:hover {
+  filter: none;
+
+  box-shadow: none;
+}
+
+
+
+/* ======================================================
+   FINAL DRAW TEXT 1
+====================================================== */
+
+#draw-textbox:not(.is-intro) {
+  left: 1222.5px;
+
+  bottom: 359px;
+
+  top: auto;
+
+  right: auto;
+
+  width: 973px;
+
+  transform:
+    translateY(
+      8px
+    );
+}
+
+
+
+/* ======================================================
+   DRAW TEXT 1 VISIBLE
+====================================================== */
+
+body.draw-active.draw-video2-phase.draw-video2-visible
+#draw-textbox.is-visible:not(.is-intro) {
+  opacity: 1;
+
+  visibility: visible;
+
+  transform:
+    translateY(
+      0
+    );
+}
+
+
+
+/* ======================================================
+   VIDEO PHASES DISABLE DRAW UI
+====================================================== */
+
+body.draw-active.draw-video1-phase
+#draw-paper-mount,
+
+body.draw-active.draw-video2-phase
+#draw-paper-mount,
+
+body.draw-active.draw-video1-phase
+#draw-controls,
+
+body.draw-active.draw-video2-phase
+#draw-controls,
+
+body.draw-active.draw-video1-phase
+#draw-mode-indicator,
+
+body.draw-active.draw-video2-phase
+#draw-mode-indicator {
+  opacity: 0;
+
+  visibility: hidden;
+
+  pointer-events: none !important;
+}
+
+
+body.draw-active.draw-video1-phase
+.draw-brush-hotspot,
+
+body.draw-active.draw-video2-phase
+.draw-brush-hotspot {
+  pointer-events: none !important;
+}
+
+
+
+/* ======================================================
+   FINAL ISOLATION
+====================================================== */
+
+body:not(.draw-active)
+#draw-paper-mount,
+
+body:not(.draw-active)
+#draw-paper-mount canvas,
+
+body:not(.draw-active)
+#draw-controls,
+
+body:not(.draw-active)
+#draw-controls *,
+
+body:not(.draw-active)
+.draw-brush-hotspot,
+
+body:not(.draw-active)
+#draw-textbox {
+  pointer-events: none !important;
+}

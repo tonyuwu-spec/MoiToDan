@@ -1,0 +1,736 @@
+/* ======================================================
+   MỜI TỪ ĐÀN
+   END SCENE
+====================================================== */
+
+
+/* ======================================================
+   EASY POSITION TWEAKS
+====================================================== */
+
+#end-window {
+
+
+  /* ==================================================
+     END TEXT 1
+
+     This is the first text shown above End_main.
+  ================================================== */
+
+  --end-text-left:
+    50%;
+
+  --end-text-top:
+    120px;
+
+  --end-text-width:
+    900px;
+
+
+
+  /* ==================================================
+     END FONT
+
+     FINAL CLICKABLE PNG.
+
+     left:
+     50% = centered horizontally
+
+     top:
+     50% = centered vertically
+
+     width:
+     change size here
+  ================================================== */
+
+  --end-font-left:
+    50%;
+
+  --end-font-top:
+    50%;
+
+  --end-font-width:
+    450px;
+
+
+
+  /* ==================================================
+     TREE SLIDE SPEED
+
+     Keep this matched with:
+     TREE_SLIDE_DURATION
+
+     inside js/endFlow.js
+  ================================================== */
+
+  --end-tree-slide-duration:
+    900ms;
+
+
+
+  /* ==================================================
+     END MAIN FADE SPEED
+  ================================================== */
+
+  --end-main-fade-duration:
+    500ms;
+
+
+
+  /* ==================================================
+     END FONT FADE SPEED
+  ================================================== */
+
+  --end-font-fade-duration:
+    450ms;
+
+}
+
+
+
+/* ======================================================
+   HIDE PLAY WHILE END IS ACTIVE
+====================================================== */
+
+body.end-active
+#play-window {
+  display:
+    none !important;
+}
+
+
+
+/* ======================================================
+   REMOVE THE ENTIRE HANDYCAM INTERFACE
+   DURING END
+====================================================== */
+
+body.end-active
+#handycam-ui {
+  opacity:
+    0 !important;
+
+  visibility:
+    hidden !important;
+
+  pointer-events:
+    none !important;
+}
+
+
+
+/* ======================================================
+   REMOVE HAND CURSOR DURING END
+====================================================== */
+
+body.end-active
+#hand-cursor {
+  opacity:
+    0 !important;
+
+  visibility:
+    hidden !important;
+
+  pointer-events:
+    none !important;
+}
+
+
+
+/* ======================================================
+   END WINDOW
+====================================================== */
+
+#end-window {
+  position:
+    absolute;
+
+  inset:
+    0;
+
+  z-index:
+    100;
+
+  width:
+    2560px;
+
+  height:
+    1440px;
+
+  overflow:
+    hidden;
+
+  background:
+    #000;
+
+  opacity:
+    0;
+
+  visibility:
+    hidden;
+
+  pointer-events:
+    none;
+
+  transition:
+    opacity 500ms ease,
+    visibility 500ms ease;
+}
+
+
+
+/* ======================================================
+   END SCENE ISOLATION
+====================================================== */
+
+body:not(.end-active)
+#end-window,
+
+body:not(.end-active)
+#end-window * {
+  pointer-events:
+    none !important;
+}
+
+
+
+/* ======================================================
+   END ACTIVE
+====================================================== */
+
+body.end-active
+#end-window {
+  opacity:
+    1;
+
+  visibility:
+    visible;
+
+  pointer-events:
+    auto;
+}
+
+
+
+/* ======================================================
+   END BOARD
+====================================================== */
+
+#end-board {
+  position:
+    absolute;
+
+  left:
+    50%;
+
+  top:
+    50%;
+
+  z-index:
+    1;
+
+  width:
+    2560px;
+
+  height:
+    1440px;
+
+  overflow:
+    hidden;
+
+  background:
+    #000;
+
+  transform:
+    translate(
+      -50%,
+      -50%
+    );
+
+  transform-origin:
+    center center;
+
+  pointer-events:
+    none;
+
+  user-select:
+    none;
+}
+
+
+
+/* ======================================================
+   END MAIN
+
+   FULL 2560 × 1440 IMAGE
+====================================================== */
+
+#end-main {
+  position:
+    absolute;
+
+  inset:
+    0;
+
+  z-index:
+    1;
+
+  display:
+    block;
+
+  width:
+    2560px;
+
+  height:
+    1440px;
+
+  max-width:
+    none;
+
+  max-height:
+    none;
+
+  object-fit:
+    fill;
+
+  opacity:
+    1;
+
+  pointer-events:
+    none;
+
+  user-select:
+    none;
+
+  transition:
+    opacity
+    var(
+      --end-main-fade-duration
+    )
+    ease;
+}
+
+
+
+/* ======================================================
+   END MAIN FADE OUT
+====================================================== */
+
+#end-window.end-main-hidden
+#end-main {
+  opacity:
+    0;
+}
+
+
+
+/* ======================================================
+   TREE SHARED
+====================================================== */
+
+.end-tree {
+  position:
+    absolute;
+
+  inset:
+    0;
+
+  display:
+    block;
+
+  width:
+    2560px;
+
+  height:
+    1440px;
+
+  max-width:
+    none;
+
+  max-height:
+    none;
+
+  object-fit:
+    fill;
+
+  pointer-events:
+    none;
+
+  user-select:
+    none;
+
+  will-change:
+    transform;
+
+  transition:
+    transform
+    var(
+      --end-tree-slide-duration
+    )
+    cubic-bezier(
+      0.55,
+      0,
+      0.18,
+      1
+    );
+}
+
+
+
+/* ======================================================
+   TREE 1
+
+   START:
+   COMPLETELY LEFT
+====================================================== */
+
+#end-tree1 {
+  z-index:
+    3;
+
+  transform:
+    translate3d(
+      -100%,
+      0,
+      0
+    );
+}
+
+
+
+/* ======================================================
+   TREE 2
+
+   START:
+   COMPLETELY RIGHT
+====================================================== */
+
+#end-tree2 {
+  z-index:
+    4;
+
+  transform:
+    translate3d(
+      100%,
+      0,
+      0
+    );
+}
+
+
+
+/* ======================================================
+   TREE 1 SLIDE IN
+====================================================== */
+
+#end-window.end-tree1-in
+#end-tree1 {
+  transform:
+    translate3d(
+      0,
+      0,
+      0
+    );
+}
+
+
+
+/* ======================================================
+   TREE 2 SLIDE IN
+====================================================== */
+
+#end-window.end-tree2-in
+#end-tree2 {
+  transform:
+    translate3d(
+      0,
+      0,
+      0
+    );
+}
+
+
+
+/* ======================================================
+   TREES RETURN TO ORIGINAL SIDES
+====================================================== */
+
+#end-window.end-trees-out
+#end-tree1 {
+  transform:
+    translate3d(
+      -100%,
+      0,
+      0
+    );
+}
+
+
+#end-window.end-trees-out
+#end-tree2 {
+  transform:
+    translate3d(
+      100%,
+      0,
+      0
+    );
+}
+
+
+
+/* ======================================================
+   END TEXT 1
+====================================================== */
+
+#end-text1 {
+  position:
+    absolute;
+
+  z-index:
+    20;
+
+  left:
+    var(
+      --end-text-left
+    );
+
+  top:
+    var(
+      --end-text-top
+    );
+
+  display:
+    block;
+
+  width:
+    var(
+      --end-text-width
+    );
+
+  height:
+    auto;
+
+  max-width:
+    none;
+
+  max-height:
+    none;
+
+  opacity:
+    0;
+
+  visibility:
+    hidden;
+
+  pointer-events:
+    none;
+
+  user-select:
+    none;
+
+  cursor:
+    pointer;
+
+  transform:
+    translateX(
+      -50%
+    )
+    translateY(
+      8px
+    );
+
+  transition:
+    opacity 320ms ease,
+    visibility 320ms ease,
+    transform 320ms ease;
+}
+
+
+
+/* ======================================================
+   END TEXT 1 VISIBLE
+====================================================== */
+
+body.end-active
+#end-text1.is-visible {
+  opacity:
+    1;
+
+  visibility:
+    visible;
+
+  pointer-events:
+    auto;
+
+  transform:
+    translateX(
+      -50%
+    )
+    translateY(
+      0
+    );
+}
+
+
+
+/* ======================================================
+   END TEXT 1 HOVER
+====================================================== */
+
+body.end-active
+#end-text1.is-visible:hover {
+  filter:
+    none;
+
+  box-shadow:
+    none;
+}
+
+
+
+/* ======================================================
+   END FONT
+
+   IMPORTANT:
+
+   z-index 2 means:
+
+   End_main      = 1
+   End_font      = 2
+   End_tree1     = 3
+   End_tree2     = 4
+
+   Therefore End_font can fade in while the trees
+   still cover the screen, and gets revealed when
+   they slide back out.
+====================================================== */
+
+#end-font {
+  position:
+    absolute;
+
+  z-index:
+    2;
+
+  left:
+    var(
+      --end-font-left
+    );
+
+  top:
+    var(
+      --end-font-top
+    );
+
+  display:
+    block;
+
+  width:
+    var(
+      --end-font-width
+    );
+
+  height:
+    auto;
+
+  max-width:
+    none;
+
+  max-height:
+    none;
+
+  opacity:
+    0;
+
+  visibility:
+    hidden;
+
+  pointer-events:
+    none;
+
+  user-select:
+    none;
+
+  cursor:
+    pointer;
+
+  transform:
+    translate(
+      -50%,
+      -50%
+    )
+    scale(
+      0.985
+    );
+
+  transition:
+    opacity
+    var(
+      --end-font-fade-duration
+    )
+    ease,
+    visibility
+    var(
+      --end-font-fade-duration
+    )
+    ease,
+    transform
+    var(
+      --end-font-fade-duration
+    )
+    ease;
+}
+
+
+
+/* ======================================================
+   END FONT STARTS APPEARING
+====================================================== */
+
+#end-window.end-font-visible
+#end-font {
+  opacity:
+    1;
+
+  visibility:
+    visible;
+
+  transform:
+    translate(
+      -50%,
+      -50%
+    )
+    scale(
+      1
+    );
+}
+
+
+
+/* ======================================================
+   END FONT ONLY BECOMES CLICKABLE
+   WHEN TREE SEQUENCE IS COMPLETELY DONE
+====================================================== */
+
+body.end-active
+#end-window.end-sequence-complete
+#end-font {
+  pointer-events:
+    auto;
+}
+
+
+
+/* ======================================================
+   END FONT HOVER
+====================================================== */
+
+body.end-active
+#end-window.end-sequence-complete
+#end-font:hover {
+  filter:
+    none;
+
+  box-shadow:
+    none;
+}

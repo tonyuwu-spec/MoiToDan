@@ -1,0 +1,1478 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Mối tơ đàn</title>
+
+
+  <!-- =================================================
+       SHARED
+  ================================================= -->
+
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
+
+
+  <!-- =================================================
+       INTRO
+  ================================================= -->
+
+  <link
+    rel="stylesheet"
+    href="css/intro.css"
+  >
+
+
+  <!-- =================================================
+       TALK
+  ================================================= -->
+
+  <link
+    rel="stylesheet"
+    href="css/talk.css"
+  >
+
+
+  <!-- =================================================
+       ROOM
+  ================================================= -->
+
+  <link
+    rel="stylesheet"
+    href="css/room.css"
+  >
+
+
+  <!-- =================================================
+       CUT
+  ================================================= -->
+
+  <link
+    rel="stylesheet"
+    href="css/cut.css"
+  >
+
+
+  <!-- =================================================
+       DRAW
+  ================================================= -->
+
+  <link
+    rel="stylesheet"
+    href="css/draw.css"
+  >
+
+
+  <!-- =================================================
+       PLAY
+  ================================================= -->
+
+  <link
+    rel="stylesheet"
+    href="css/play.css"
+  >
+
+
+  <!-- =================================================
+       END
+  ================================================= -->
+
+  <link
+    rel="stylesheet"
+    href="css/end.css"
+  >
+
+</head>
+
+
+<body>
+
+
+  <main id="app">
+
+
+    <div id="design-stage">
+
+
+      <!-- =================================================
+           OPENING
+      ================================================= -->
+
+      <section id="opening-screen">
+
+
+        <div id="opening-slime"></div>
+
+
+        <div id="opening-board">
+
+
+          <div
+            id="opening-hands-scale"
+            class="opening-hands-scale"
+          >
+
+            <img
+              id="opening-hands"
+              src="assets/Intro_hands.png"
+              alt=""
+              draggable="false"
+            >
+
+          </div>
+
+
+
+          <button
+            id="opening-enter"
+            class="opening-enter"
+            type="button"
+            aria-label="Enter Mối tơ đàn"
+          >
+
+            <img
+              id="opening-title"
+              src="assets/Intro_font.png"
+              alt="Mối tơ đàn"
+              draggable="false"
+            >
+
+          </button>
+
+
+        </div>
+
+
+      </section>
+
+
+
+      <!-- =================================================
+           INTRO
+      ================================================= -->
+
+      <div id="scene-window">
+
+
+        <div id="scene-board">
+
+
+          <video
+            id="scene-video"
+            class="scene-media scene-video"
+            src="assets/Intro_dawnvid.mp4"
+            muted
+            playsinline
+            preload="auto"
+            loop
+          ></video>
+
+
+          <img
+            id="tree3"
+            class="scene-media tree-layer tree3"
+            src="assets/Intro_dawntree3.png"
+            alt=""
+            draggable="false"
+          >
+
+
+          <img
+            id="tree2"
+            class="scene-media tree-layer tree2"
+            src="assets/Intro_dawntree2.png"
+            alt=""
+            draggable="false"
+          >
+
+
+          <img
+            id="tree1"
+            class="scene-media tree-layer tree1"
+            src="assets/Intro_dawntree1.png"
+            alt=""
+            draggable="false"
+          >
+
+
+        </div>
+
+
+      </div>
+
+
+
+      <img
+        id="intro-textbox"
+        class="intro-textbox"
+        src="assets/Intro_dawntext1.png"
+        alt=""
+        draggable="false"
+      >
+
+
+
+      <!-- =================================================
+           TALK
+      ================================================= -->
+
+      <div
+        id="talk-window"
+        data-environment="dawn"
+      >
+
+
+        <div id="talk-board">
+
+
+          <video
+            id="talk-video"
+            class="talk-media talk-video"
+            src="assets/Talk_dawnvid.mp4"
+            muted
+            playsinline
+            preload="auto"
+            loop
+          ></video>
+
+
+          <img
+            id="talk-layer3"
+            class="talk-media talk-layer3"
+            src="assets/Talk_dawn3.png"
+            alt=""
+            draggable="false"
+          >
+
+
+          <img
+            id="talk-worm"
+            class="talk-worm"
+            src="assets/Talk_dawnworm.png"
+            alt=""
+            draggable="false"
+          >
+
+
+          <img
+            id="talk-character"
+            class="talk-media talk-character"
+            src="assets/Talk_dawn1.png"
+            alt=""
+            draggable="false"
+          >
+
+
+        </div>
+
+
+      </div>
+
+
+
+      <img
+        id="talk-textbox"
+        class="talk-textbox"
+        src="assets/Talk_dawntext1.png"
+        alt=""
+        draggable="false"
+      >
+
+
+
+      <!-- =================================================
+           ROOM
+      ================================================= -->
+
+      <div
+        id="room-window"
+        data-environment="dawn"
+      >
+
+
+        <div id="room-board">
+
+
+          <img
+            id="room-scene-image"
+            class="room-full-image room-scene-image"
+            src="assets/Room_dawn1.png"
+            alt=""
+            draggable="false"
+          >
+
+
+          <img
+            id="room-left-door"
+            class="room-door room-door-left"
+            src="assets/Room_dawnleftdoor.png"
+            alt=""
+            draggable="false"
+          >
+
+
+          <img
+            id="room-right-door"
+            class="room-door room-door-right"
+            src="assets/Room_dawnrightdoor.png"
+            alt=""
+            draggable="false"
+          >
+
+
+          <button
+            id="room-door-hotspot"
+            class="room-door-hotspot"
+            type="button"
+            aria-label="Open room"
+          >
+
+            <span class="room-hotspot-dot"></span>
+
+          </button>
+
+
+          <img
+            id="room-worm"
+            class="room-worm"
+            src="assets/Room_dawnworm.png"
+            alt=""
+            draggable="false"
+          >
+
+
+        </div>
+
+
+      </div>
+
+
+
+      <img
+        id="room-textbox"
+        class="room-textbox is-top"
+        src="assets/Room_dawntext1.png"
+        alt=""
+        draggable="false"
+      >
+
+
+
+      <!-- =================================================
+           CUT
+      ================================================= -->
+
+      <div
+        id="cut-window"
+        data-environment="dawn"
+      >
+
+
+        <div id="cut-board">
+
+
+          <img
+            id="cut-bg"
+            class="cut-bg"
+            src="assets/Cut_dawnbg.png"
+            alt=""
+            draggable="false"
+          >
+
+
+          <div id="cut-silk-mount"></div>
+
+
+          <img
+            id="cut-talk-art"
+            class="cut-talk-art"
+            src="assets/Cut_talk1.png"
+            alt=""
+            draggable="false"
+          >
+
+
+        </div>
+
+
+
+        <img
+          id="cut-textbox"
+          class="cut-textbox"
+          src="assets/Cut_text1.png"
+          alt=""
+          draggable="false"
+        >
+
+
+
+        <section
+          id="cut-input-panel"
+          class="cut-input-panel"
+        >
+
+
+          <div class="cut-input-heading">
+            WRITE YOUR THOUGHTS
+          </div>
+
+
+          <div class="cut-input-subtitle">
+
+            Think about someone you cared for,
+            loved, lost, or still miss.
+
+          </div>
+
+
+          <textarea
+            id="cut-thought-input"
+            maxlength="600"
+            spellcheck="true"
+            placeholder="Write what you remember, what you miss, what hurt, or what you wish you had said..."
+          ></textarea>
+
+
+
+          <div class="cut-input-buttons">
+
+
+            <button
+              id="cut-add-button"
+              class="cut-input-button"
+              type="button"
+            >
+              ADD
+            </button>
+
+
+            <button
+              id="cut-finish-button"
+              class="cut-input-button"
+              type="button"
+            >
+              FINISH
+            </button>
+
+
+          </div>
+
+
+        </section>
+
+
+
+        <div
+          id="cut-mode-hint"
+          class="cut-mode-hint"
+        >
+
+          MOVE MOUSE OR OPEN HAND THROUGH SILK TO CUT
+
+        </div>
+
+
+      </div>
+
+
+
+      <!-- =================================================
+           DRAW
+      ================================================= -->
+
+      <div
+        id="draw-window"
+        data-environment="dawn"
+      >
+
+
+        <div id="draw-board">
+
+
+          <img
+            id="draw-bg"
+            class="draw-bg"
+            src="assets/Draw_dawnbg.png"
+            alt=""
+            draggable="false"
+          >
+
+
+          <video
+            id="draw-video1"
+            class="draw-video"
+            src="assets/Draw_dawnvid.mp4"
+            muted
+            playsinline
+            preload="auto"
+          ></video>
+
+
+          <video
+            id="draw-video2"
+            class="draw-video"
+            src="assets/Draw_dawnvid2.mp4"
+            muted
+            playsinline
+            preload="auto"
+            loop
+          ></video>
+
+
+          <div id="draw-paper-mount"></div>
+
+
+        </div>
+
+
+
+        <button
+          id="draw-silk-hotspot"
+          class="draw-brush-hotspot"
+          type="button"
+          aria-label="Select silk brush"
+        ></button>
+
+
+
+        <button
+          id="draw-pen-hotspot"
+          class="draw-brush-hotspot"
+          type="button"
+          aria-label="Select pen"
+        ></button>
+
+
+
+        <div id="draw-controls">
+
+
+          <button
+            id="draw-rotate-button"
+            class="draw-control-button active"
+            type="button"
+          >
+            ROTATE
+          </button>
+
+
+          <button
+            id="draw-clear-front-button"
+            class="draw-control-button"
+            type="button"
+          >
+            CLEAR DRAW
+          </button>
+
+
+          <button
+            id="draw-clear-back-button"
+            class="draw-control-button"
+            type="button"
+          >
+            CLEAR TEXT
+          </button>
+
+
+          <button
+            id="draw-reset-button"
+            class="draw-control-button"
+            type="button"
+          >
+            RESET
+          </button>
+
+
+          <button
+            id="draw-finish-button"
+            class="draw-control-button"
+            type="button"
+          >
+            FINISH
+          </button>
+
+
+        </div>
+
+
+
+        <div id="draw-mode-indicator">
+          ROTATE MODE
+        </div>
+
+
+
+        <img
+          id="draw-textbox"
+          src="assets/Draw_text1.png"
+          alt=""
+          draggable="false"
+        >
+
+
+      </div>
+
+
+
+      <!-- =================================================
+           PLAY
+      ================================================= -->
+
+      <div
+        id="play-window"
+        data-environment="dawn"
+      >
+
+
+        <div id="play-board">
+
+
+          <img
+            id="play-bg3"
+            class="play-bg3"
+            src="assets/Play_dawnbg3.png"
+            alt=""
+            draggable="false"
+          >
+
+
+          <img
+            id="play-worm"
+            class="play-worm"
+            src="assets/Play_dawnworm.png"
+            alt=""
+            draggable="false"
+          >
+
+
+          <img
+            id="play-bg1"
+            class="play-bg1"
+            src="assets/Play_dawnbg1.png"
+            alt=""
+            draggable="false"
+          >
+
+
+          <div id="play-silk-mount"></div>
+
+
+        </div>
+
+
+
+        <img
+          id="play-text1"
+          src="assets/Play_text1.png"
+          alt=""
+          draggable="false"
+          role="button"
+          tabindex="0"
+          aria-hidden="true"
+        >
+
+
+      </div>
+
+
+
+      <!-- =================================================
+           END
+      ================================================= -->
+
+      <div id="end-window">
+
+
+        <div id="end-board">
+
+
+          <img
+            id="end-main"
+            src="assets/End_main.png"
+            alt=""
+            draggable="false"
+          >
+
+
+          <img
+            id="end-font"
+            src="assets/End_font.png"
+            alt=""
+            draggable="false"
+            role="button"
+            tabindex="-1"
+            aria-hidden="true"
+          >
+
+
+          <img
+            id="end-tree1"
+            class="end-tree"
+            src="assets/End_tree1.png"
+            alt=""
+            draggable="false"
+          >
+
+
+          <img
+            id="end-tree2"
+            class="end-tree"
+            src="assets/End_tree2.png"
+            alt=""
+            draggable="false"
+          >
+
+
+        </div>
+
+
+
+        <img
+          id="end-text1"
+          src="assets/End_text1.png"
+          alt=""
+          draggable="false"
+          role="button"
+          tabindex="0"
+          aria-hidden="true"
+        >
+
+
+      </div>
+
+
+
+      <!-- =================================================
+           STARTUP FADE
+      ================================================= -->
+
+      <div id="startup-fade"></div>
+
+
+
+      <!-- =================================================
+           SHARED HANDYCAM
+      ================================================= -->
+
+      <div id="handycam-ui">
+
+
+        <div class="camera-corner corner-tl"></div>
+
+        <div class="camera-corner corner-tr"></div>
+
+        <div class="camera-corner corner-bl"></div>
+
+        <div class="camera-corner corner-br"></div>
+
+
+
+        <!-- REC -->
+
+        <div class="rec-ui">
+
+          <span>
+            REC
+          </span>
+
+          <span class="rec-dot"></span>
+
+        </div>
+
+
+
+        <!-- ZOOM -->
+
+        <div class="zoom-ui">
+
+
+          <div
+            id="zoom-label"
+            class="zoom-label"
+          >
+            ZOOM 1.0×
+          </div>
+
+
+          <div class="zoom-track">
+
+
+            <span
+              class="zoom-stop zoom-stop-left"
+            ></span>
+
+
+            <span
+              id="zoom-marker"
+              class="zoom-marker"
+            ></span>
+
+
+            <span
+              class="zoom-stop zoom-stop-right"
+            ></span>
+
+
+          </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             CAPTURE BUTTON
+        ================================================= -->
+
+        <button
+          id="capture-button"
+          class="capture-button"
+          type="button"
+          aria-label="Capture scene"
+          title="Capture scene"
+        >
+
+          <span class="capture-camera-icon">
+
+            <span class="capture-camera-lens"></span>
+
+          </span>
+
+        </button>
+
+
+
+        <!-- MENU -->
+
+        <button
+          id="menu-button"
+          class="menu-button"
+          type="button"
+          aria-label="Menu"
+        >
+
+          <span></span>
+
+          <span></span>
+
+          <span></span>
+
+        </button>
+
+
+
+        <div
+          id="menu-panel"
+          class="menu-panel"
+        >
+
+
+          <p class="menu-small">
+            NAVIGATION
+          </p>
+
+
+          <button
+            class="nav-item active"
+            data-stage="intro"
+            type="button"
+          >
+            01 — INTRO
+          </button>
+
+
+          <button
+            class="nav-item"
+            data-stage="talking"
+            type="button"
+          >
+            02 — TALKING
+          </button>
+
+
+          <button
+            class="nav-item"
+            data-stage="tangle"
+            type="button"
+          >
+            03 — TANGLE
+          </button>
+
+
+          <button
+            class="nav-item"
+            data-stage="collection"
+            type="button"
+          >
+            04 — REFLECTION
+          </button>
+
+
+        </div>
+
+
+
+        <!-- HAND GUIDE -->
+
+        <div
+          id="gesture-guide"
+          class="gesture-guide"
+          aria-hidden="true"
+        >
+
+
+          <div class="gesture-guide-panel">
+
+
+            <div class="gesture-guide-heading">
+
+
+              <span class="gesture-guide-title">
+                HAND CONTROL
+              </span>
+
+
+              <span class="gesture-guide-small">
+                GUIDE
+              </span>
+
+
+            </div>
+
+
+
+            <div class="gesture-guide-content">
+
+
+              <img
+                id="gesture-guide-art"
+                class="gesture-guide-art"
+                src="assets/Intro_handguide.png"
+                alt="Hand gesture controls"
+                draggable="false"
+                width="137"
+                height="542"
+              >
+
+
+              <div class="gesture-guide-labels">
+
+
+                <div class="gesture-guide-label">
+
+                  <span class="gesture-guide-label-main">
+                    POINTER
+                  </span>
+
+                  <span class="gesture-guide-label-note">
+                    cursor / click
+                  </span>
+
+                </div>
+
+
+                <div class="gesture-guide-label">
+
+                  <span class="gesture-guide-label-main">
+                    ZOOM OUT
+                  </span>
+
+                  <span class="gesture-guide-label-note">
+                    2 fingers
+                  </span>
+
+                </div>
+
+
+                <div class="gesture-guide-label">
+
+                  <span class="gesture-guide-label-main">
+                    ZOOM IN
+                  </span>
+
+                  <span class="gesture-guide-label-note">
+                    3 fingers
+                  </span>
+
+                </div>
+
+
+                <div class="gesture-guide-label">
+
+                  <span class="gesture-guide-label-main">
+                    MOVE
+                  </span>
+
+                  <span class="gesture-guide-label-note">
+                    open hand
+                  </span>
+
+                </div>
+
+
+              </div>
+
+
+            </div>
+
+
+
+            <!-- =============================================
+                 QUICK SCREENSHOT
+
+                 Kept separate from hand gestures because
+                 this is a keyboard shortcut.
+            ============================================== -->
+
+            <div class="gesture-guide-shortcut">
+
+
+              <div class="gesture-guide-shortcut-copy">
+
+                <span class="gesture-guide-shortcut-title">
+                  QUICK SCREENSHOT
+                </span>
+
+                <span class="gesture-guide-shortcut-note">
+                  capture current scene
+                </span>
+
+              </div>
+
+
+              <kbd class="gesture-guide-key">
+                S
+              </kbd>
+
+
+            </div>
+
+
+          </div>
+
+
+
+          <button
+            id="gesture-guide-button"
+            class="gesture-guide-button"
+            type="button"
+            aria-label="Toggle hand gesture guide"
+            aria-expanded="false"
+          >
+
+            <span></span>
+
+            <span></span>
+
+            <span></span>
+
+          </button>
+
+
+        </div>
+
+
+
+        <!-- MIC -->
+
+        <div class="mic-ui">
+
+
+          <div class="mic-row">
+
+            <span class="mic-letter">
+              L
+            </span>
+
+
+            <div
+              id="meter-left"
+              class="meter-bars"
+            ></div>
+
+          </div>
+
+
+          <div class="mic-row">
+
+            <span class="mic-letter">
+              R
+            </span>
+
+
+            <div
+              id="meter-right"
+              class="meter-bars"
+            ></div>
+
+          </div>
+
+
+        </div>
+
+
+
+        <!-- CAMERA -->
+
+        <div
+          id="preview-group"
+          class="preview-group"
+        >
+
+
+          <div
+            id="preview-frame"
+            class="preview-frame"
+          >
+
+
+            <video
+              id="webcam-preview"
+              autoplay
+              muted
+              playsinline
+            ></video>
+
+
+            <div
+              id="preview-message"
+              class="preview-message"
+            >
+              CAMERA OFF
+            </div>
+
+
+            <div
+              id="gesture-status"
+              class="gesture-status"
+            >
+              HAND TRACKING OFF
+            </div>
+
+
+          </div>
+
+
+
+          <button
+            id="eye-button"
+            class="eye-button"
+            type="button"
+            aria-label="Toggle camera preview"
+          >
+
+
+            <div class="eye-shape">
+
+              <span class="eye-pupil"></span>
+
+            </div>
+
+
+          </button>
+
+
+        </div>
+
+
+
+        <!-- TIMER -->
+
+        <div
+          id="record-timer"
+          class="record-timer"
+        >
+          00:00:00
+        </div>
+
+
+      </div>
+
+
+
+      <!-- =================================================
+           BOOT
+      ================================================= -->
+
+      <section id="boot-screen">
+
+
+        <div class="boot-corner boot-tl"></div>
+
+        <div class="boot-corner boot-tr"></div>
+
+        <div class="boot-corner boot-bl"></div>
+
+        <div class="boot-corner boot-br"></div>
+
+
+
+        <div class="boot-rec">
+
+          REC
+
+          <span></span>
+
+        </div>
+
+
+
+        <div class="setup-panel">
+
+
+          <div class="setup-small">
+            CAMCORDERS INITIALIZATION
+          </div>
+
+
+          <h1>
+            Before recording
+          </h1>
+
+
+
+          <div class="setup-item">
+
+
+            <div>
+
+              <span class="number">
+                01
+              </span>
+
+              Set the time
+
+            </div>
+
+
+            <input
+              id="time-input"
+              type="time"
+              value="05:30"
+            >
+
+
+          </div>
+
+
+
+          <div
+            id="time-result"
+            class="time-result"
+          >
+            05:30 → DAWN
+          </div>
+
+
+
+          <button
+            id="allow-camera"
+            class="setup-item setup-action"
+            type="button"
+          >
+
+
+            <div>
+
+              <span class="number">
+                02
+              </span>
+
+              Allow camera
+
+            </div>
+
+
+            <span
+              id="camera-status"
+              class="permission-status"
+            >
+              NOT ALLOWED
+            </span>
+
+
+          </button>
+
+
+
+          <button
+            id="allow-mic"
+            class="setup-item setup-action"
+            type="button"
+          >
+
+
+            <div>
+
+              <span class="number">
+                03
+              </span>
+
+              Allow microphone
+
+            </div>
+
+
+            <span
+              id="mic-status"
+              class="permission-status"
+            >
+              NOT ALLOWED
+            </span>
+
+
+          </button>
+
+
+
+          <button
+            id="enter-button"
+            class="enter-button"
+            type="button"
+          >
+
+            TURN ON CAMERA →
+
+          </button>
+
+
+        </div>
+
+
+
+        <div class="boot-footer">
+
+
+          <span>
+            CAM 01
+          </span>
+
+
+          <span>
+            16:9
+          </span>
+
+
+          <span>
+            STANDBY
+          </span>
+
+
+        </div>
+
+
+      </section>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         HAND CURSOR
+    ================================================= -->
+
+    <div
+      id="hand-cursor"
+      class="hand-cursor"
+    >
+
+
+      <div class="cursor-arrow"></div>
+
+
+      <div class="cursor-ring"></div>
+
+
+      <div
+        id="cursor-label"
+        class="cursor-label"
+      >
+        POINTER
+      </div>
+
+
+    </div>
+
+
+  </main>
+
+
+
+  <!-- =================================================
+       P5
+  ================================================= -->
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/p5@2.3.3/lib/p5.min.js"
+  ></script>
+
+
+
+  <!-- =================================================
+       HTML2CANVAS
+  ================================================= -->
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"
+  ></script>
+
+
+
+  <!-- =================================================
+       MAIN APP
+  ================================================= -->
+
+  <script
+    type="module"
+    src="sketch.js"
+  ></script>
+
+
+
+  <!-- =================================================
+       PLAY → END FLOW
+  ================================================= -->
+
+  <script
+    type="module"
+    src="js/endFlow.js"
+  ></script>
+
+
+
+  <!-- =================================================
+       GLOBAL SOUND
+  ================================================= -->
+
+  <script
+    type="module"
+    src="js/soundManager.js"
+  ></script>
+
+
+
+  <!-- =================================================
+       SCREENSHOT
+  ================================================= -->
+
+  <script
+    type="module"
+    src="js/screenshotManager.js"
+  ></script>
+
+
+</body>
+
+</html>
